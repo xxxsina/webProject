@@ -15,7 +15,7 @@ type Config struct {
 }
 
 var (
-	cfgPath = flag.String("config", "config/config.yml", "appbase file path")
+	cfgPath = flag.String("config", "../../src/webProject/config/config.yml", "appbase file path")
 )
 
 /**

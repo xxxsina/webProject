@@ -50,7 +50,10 @@
 * 而go install 后面是直接加xxx（xxx为目录名） ； 从文件夹编译
 
 
-## 驱动支持
+## 其他
+
+### 已完成 gin 、 xorm 、 mysql 
+### 未完成 redis 、MongoDB 、 JWT 、数据验证 、各种内库 、 restful
 
 ## LICENSE
 
