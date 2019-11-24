@@ -1,11 +1,17 @@
 # golang 学习
 
-## 先 git 方法
+## 先 git 项目
 > git init
+
 > git remote add origin https://github.com/xxxsina/webProject.git
+
 > git add .
+
 > git commit -m "message"
+
 > git push -u origin master
+
+
 
 > git pull origin master
 
