@@ -1,0 +1,9 @@
+app:
+  port: 8080
+  debug: true
+model:
+  user: root
+  password: root
+  host: 127.0.0.1:3306
+  name: go_db
+  prefix: go_
