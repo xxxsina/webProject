@@ -5,14 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"webProject/service"
+	"webProject/com_party/service"
 )
 
 //这里提供一个参数提交的绑定数据结构
 type UserInfo struct {
 	Id int `form:"id" json:"id"`
-	Name string `form:"name" json:"name" binding:"required"`
-	Mobile string `form:"name" json:"mobile" binding:"required"`
+	Name string `form:"name" json:"name"`
+	Mobile string `form:"name" json:"mobile"`
 }
 
 func GetName(c *gin.Context) {

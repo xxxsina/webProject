@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"webProject/controllers"
+	"webProject/app/controllers"
 )
 
 func RegisterRouters(g *gin.Engine) {

@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"time"
-	"webProject/routers"
+	"webProject/app/routers"
 )
 
 type Config struct {

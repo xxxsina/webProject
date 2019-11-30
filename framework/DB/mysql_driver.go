@@ -1,4 +1,4 @@
-package models
+package DB
 
 import (
 	"fmt"
@@ -9,11 +9,13 @@ import (
 )
 
 type Config struct {
+	Driver   string
 	User     string
 	Password string
 	Host     string
 	Name     string
 	Prefix   string
+	Charset  string
 }
 
 var (
@@ -22,16 +24,16 @@ var (
 )
 
 //xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/go_db?charset=utf8" templates/goxorm
-var DriverName string = "mysql"
-var MasterDataSourceName string = "%s:%s@tcp(%s)/%s?charset=utf8"
+var MasterDataSourceName string = "%s:%s@tcp(%s)/%s?charset=%s"
 
 func Setup(cfg Config) error {
 	var err error
-	Engine, err = xorm.NewEngine(DriverName, fmt.Sprintf(MasterDataSourceName,
+	Engine, err = xorm.NewEngine(cfg.Driver, fmt.Sprintf(MasterDataSourceName,
 		cfg.User,
 		cfg.Password,
 		cfg.Host,
-		cfg.Name))
+		cfg.Name,
+		cfg.Charset))
 	if err != nil {
 		log.Fatal("connect mysql failure :", err)
 		return err

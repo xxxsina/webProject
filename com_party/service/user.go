@@ -3,7 +3,8 @@ package service
 import (
 	"fmt"
 	"log"
-	"webProject/models"
+	"webProject/com_party/models"
+	"webProject/framework/DB"
 )
 
 type User struct {
@@ -14,7 +15,7 @@ type User struct {
 
 func (r *User) GetName() (*models.User, error) {
 	u := &models.User{Id: r.ID}
-	flag, err := models.Engine.Get(u)
+	flag, err := DB.Engine.Get(u)
 	if flag {
 		fmt.Println("%s", r)
 	} else if err != nil {
@@ -27,7 +28,7 @@ func (r *User) GetName() (*models.User, error) {
 
 func (r *User) InsertUser() (*models.User, error) {
 	u := &models.User{Name: r.Name, Mobile: r.Mobile}
-	num, err := models.Engine.InsertOne(u)
+	num, err := DB.Engine.InsertOne(u)
 	if err != nil {
 		log.Fatal("error : ", err)
 	} else {
