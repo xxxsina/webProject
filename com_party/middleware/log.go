@@ -10,7 +10,7 @@ import (
 )
 
 // 日志记录到文件
-func LoggerToFile(logFilePath, logFileName string) gin.HandlerFunc {
+func LoggerToFile(logFilePath string, logFileName string, debugLevel uint32) gin.HandlerFunc {
 
 	// 日志文件
 	fileName := path.Join(logFilePath, logFileName)
@@ -28,7 +28,8 @@ func LoggerToFile(logFilePath, logFileName string) gin.HandlerFunc {
 	logger.Out = src
 
 	// 设置日志级别
-	logger.SetLevel(logrus.DebugLevel)
+	//logger.SetLevel(logrus.DebugLevel)
+	logger.SetLevel(logrus.Level(debugLevel))
 
 	// 设置 rotatelogs
 	//logWriter, err := rotatelogs.New(

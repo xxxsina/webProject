@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"time"
+	"webProject/com_party/middleware"
 	"webProject/com_party/service"
 )
 
@@ -35,15 +38,41 @@ func GetName(c *gin.Context) {
 		return
 	}
 
+	SigningKey := "123456"
+
+	j := &middleware.JWT{
+		[]byte(SigningKey),
+	}
+
+	claims := middleware.CustomClaims{
+		ID:             string(u.Id),
+		Name:           u.Name,
+		Phone:          u.Mobile,
+		StandardClaims: jwt.StandardClaims{
+			NotBefore: int64(time.Now().Unix() - 1000),
+			ExpiresAt: int64(time.Now().Unix() + 3600), // 过期时间 一小时
+			Issuer:    SigningKey,                   //签名的发行者
+		},
+	}
+
+	token, err := j.CreateToken(claims)
+
 	c.JSON(http.StatusOK, gin.H{
 		"code" : http.StatusOK,
 		"massage" : "success",
+		"token" : token,
 		"data" : u,
 	})
 }
 
 func Add(c *gin.Context)  {
 	var name, mobile string
+	fmt.Println("==================")
+	//var v middleware.CustomClaims
+	//v, _ = c.Get("claims")[0]
+	//fmt.Println()
+	fmt.Println(c.Get("claims"))
+	fmt.Println("==================")
 	//name = c.Request.FormValue("name")
 	//mobile = c.Request.FormValue("mobile")
 	var uinfo UserInfo

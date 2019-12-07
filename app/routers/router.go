@@ -9,10 +9,11 @@ import (
 )
 
 type Config struct {
-	Port string
-	Debug bool
-	Logfilepath string
-	Logfilename string
+	Port string			//监听端口
+	Debug bool			//是否开启日志
+	Debuglevel uint32	//日志级别
+	Logfilepath string	//日志路径
+	Logfilename string	//日志名称
 }
 
 //解决gin只能从Request.body获取一次的方法
@@ -33,7 +34,7 @@ func RegisterRouters(g *gin.Engine, cfg Config) {
 		g.Use(reWriteParamsMiddleware())
 		//Logger
 		if cfg.Debug {
-			g.Use(middleware.LoggerToFile(cfg.Logfilepath, cfg.Logfilename))
+			g.Use(middleware.LoggerToFile(cfg.Logfilepath, cfg.Logfilename, cfg.Debuglevel))
 		}
 	}
 	//路由
@@ -41,7 +42,7 @@ func RegisterRouters(g *gin.Engine, cfg Config) {
 		//单个路由方法
 		g.GET("/name/:id", controllers.GetName)
 		//一组路由方法
-		v1 := g.Group("/v1")
+		v1 := g.Group("/v1", middleware.JWTAuth())
 		{
 			v1.POST("/add", controllers.Add)
 		}
