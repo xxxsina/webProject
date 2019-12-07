@@ -83,7 +83,7 @@
     - templates
         1. 存放的用于反射的文件
         2. xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/go_db?charset=utf8" templates/goxorm
-    - go.mod //管理包文件
+    - go.mod //库管理文件
     - README.md
 
 ## LICENSE

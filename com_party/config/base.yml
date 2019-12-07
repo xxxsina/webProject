@@ -1,3 +1,5 @@
 app:
   port: 8080
   debug: true
+  logfilepath: "./logs"
+  logfilename: "logName.log"

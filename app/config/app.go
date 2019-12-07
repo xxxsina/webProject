@@ -11,16 +11,11 @@ import (
 	"webProject/app/routers"
 )
 
-type Config struct {
-	Port string
-	Debug bool
-}
-
-func Run(cfg Config) {
+func Run(cfg routers.Config) {
 	//初始化gin
 	router := gin.Default()
 	//注册路由
-	routers.RegisterRouters(router)
+	routers.RegisterRouters(router, cfg)
 	//设置监听端口、路由
 	srv := &http.Server{
 		Addr : ":" + cfg.Port,

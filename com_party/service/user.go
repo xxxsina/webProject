@@ -3,8 +3,8 @@ package service
 import (
 	"fmt"
 	"log"
+	"webProject/com_party/libraries/DB"
 	"webProject/com_party/models"
-	"webProject/framework/DB"
 )
 
 type User struct {

@@ -7,11 +7,12 @@ import (
 	"io/ioutil"
 	"log"
 	"webProject/app/config"
-	"webProject/framework/DB"
+	"webProject/app/routers"
+	"webProject/com_party/libraries/DB"
 )
 
 type Config struct {
-	App   app.Config
+	App   routers.Config
 	Model DB.Config
 }
 
