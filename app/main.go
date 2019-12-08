@@ -2,17 +2,15 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"webProject/app/config"
-	"webProject/app/routers"
 	"webProject/com_party/libraries/DB"
 )
 
 type Config struct {
-	App   routers.Config
+	App   app.Config
 	Model DB.Config
 }
 
@@ -44,11 +42,9 @@ func main() {
 		}
 	}
 	//初始化数据库
-
 	if err := DB.Setup(cfg.Model); err != nil {
 		panic(err)
 	}
-	fmt.Println(cfg)
 	//初始化应用
 	app.Run(cfg.App)
 	log.Panicln("Server exiting")

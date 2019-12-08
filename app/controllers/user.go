@@ -45,7 +45,7 @@ func GetName(c *gin.Context) {
 	}
 
 	claims := middleware.CustomClaims{
-		ID:             string(u.Id),
+		ID:             u.Id,
 		Name:           u.Name,
 		Phone:          u.Mobile,
 		StandardClaims: jwt.StandardClaims{
@@ -71,7 +71,9 @@ func Add(c *gin.Context)  {
 	//var v middleware.CustomClaims
 	//v, _ = c.Get("claims")[0]
 	//fmt.Println()
-	fmt.Println(c.Get("claims"))
+	claims := c.MustGet("claims").(*middleware.CustomClaims)
+	fmt.Println(claims.ID)
+	fmt.Println(claims.Name)
 	fmt.Println("==================")
 	//name = c.Request.FormValue("name")
 	//mobile = c.Request.FormValue("mobile")

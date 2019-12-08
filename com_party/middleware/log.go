@@ -7,18 +7,41 @@ import (
 	"os"
 	"path"
 	"time"
+	"webProject/com_party/helper"
 )
+
+const FILE_SUFFIX = ".log"
 
 // 日志记录到文件
 func LoggerToFile(logFilePath string, logFileName string, debugLevel uint32) gin.HandlerFunc {
-
 	// 日志文件
-	fileName := path.Join(logFilePath, logFileName)
+	//fileName := path.Join(filePath, logFileName)
+	var fileAllPathName string
+
+	//设置带时间的文件和文件夹
+	xTime := helper.TimeFormatYMD()
+	fileName := logFileName + "-" + xTime + FILE_SUFFIX
+
+	//检查时间文件夹是否存在，不存在就创建
+	filePath := path.Join(logFilePath, xTime)
+	_, err := os.Stat(filePath)
+	if os.IsNotExist(err) {
+		err := os.Mkdir(filePath, os.ModePerm)
+		if err == nil {
+			//注意这里是有命名空间问题的，需要在外面先声明变量
+			fileAllPathName = path.Join(filePath, fileName)
+		} else {
+			fileAllPathName = path.Join(logFilePath, fileName)
+		}
+	} else {
+		fileAllPathName = path.Join(filePath, fileName)
+	}
 
 	// 写入文件
-	src, err := os.OpenFile(fileName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	src, err := os.OpenFile(fileAllPathName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+
 	if err != nil {
-		fmt.Println("err", err)
+		fmt.Println("err : ", err)
 	}
 
 	// 实例化

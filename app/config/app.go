@@ -8,18 +8,17 @@ import (
 	"os"
 	"os/signal"
 	"time"
-	"webProject/app/routers"
 )
 
-func Run(cfg routers.Config) {
+func Run(appCfg Config) {
 	//初始化gin
 	router := gin.Default()
 	//注册路由
-	routers.RegisterRouters(router, cfg)
+	RegisterRouters(router, appCfg)
 	//设置监听端口、路由
 	srv := &http.Server{
-		Addr : ":" + cfg.Port,
-		Handler : router,
+		Addr:    ":" + appCfg.Port,
+		Handler: router,
 	}
 	//并发监听
 	go func() {
@@ -35,7 +34,7 @@ func Run(cfg routers.Config) {
 	<-quit
 	log.Println("Shutdown Server")
 	//请求超时时间控制
-	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown", err)
