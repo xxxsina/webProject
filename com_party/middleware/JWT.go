@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 	"webProject/com_party/helper"
+	"webProject/com_party/models"
 )
 
 // 一些常量
@@ -15,7 +16,7 @@ var (
 	TokenNotValidYet error  = errors.New(helper.CodeText(helper.Code10006))
 	TokenMalformed   error  = errors.New(helper.CodeText(helper.Code10007))
 	TokenInvalid     error  = errors.New(helper.CodeText(helper.Code10008))
-	SignKey          string = "d3ab7ede15cfdcfff930553da3889d01"	//初始化key，可以通过SetSignKey设置
+	SignKey          string = "d3ab7ede15cfdcfff930553da3889d01" //初始化key，可以通过SetSignKey设置
 )
 
 // JWT 签名结构
@@ -25,10 +26,33 @@ type JWT struct {
 
 // 载荷，可以加一些自己需要的信息
 type CustomClaims struct {
-	ID    int `json:"userId"`
-	Name  string `json:"name"`
-	Phone string `json:"phone"`
+	ID    int    `json:"id"`
+	Mobile string `json:"mobile"`
 	jwt.StandardClaims
+}
+
+// 登录时调用 生成token
+func JWTXcreate(u *models.User, c *gin.Context) (string, error) {
+
+	j := NewJWT()
+
+	claims := CustomClaims{
+		ID:    u.Id,
+		Mobile: u.Mobile,
+		StandardClaims: jwt.StandardClaims{
+			NotBefore: int64(time.Now().Unix() - 1000),
+			ExpiresAt: int64(time.Now().Unix() + 3600), // 过期时间 一小时
+			Issuer:    GetSignKey(),                    //签名的发行者
+		},
+	}
+
+	token, err := j.CreateToken(claims)
+
+	if err != nil {
+		return "", err
+	}
+
+	return token, err
 }
 
 // JWTAuth 中间件，检查token

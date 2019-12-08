@@ -6,4 +6,5 @@ type Config struct {
 	Debuglevel uint32	//日志级别
 	Logfilepath string	//日志路径
 	Logfilename string	//日志名称
+	Jwtsignkey string	//JWT SignKey
 }

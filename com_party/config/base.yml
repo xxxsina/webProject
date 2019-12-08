@@ -4,3 +4,4 @@ app:
   debuglevel: 5
   logfilepath: "./logs/"
   logfilename: "log"
+  jwtsignkey: "d3ab7ede15cfdcfff930553da3889d01"

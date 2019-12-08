@@ -2,11 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"time"
 	"webProject/com_party/helper"
 	"webProject/com_party/middleware"
 	"webProject/com_party/service"
@@ -41,34 +39,22 @@ func GetName(c *gin.Context) {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
+	//生成token
+	token, err := middleware.JWTXcreate(u, c)
 
-	//SigningKey := "123456"
-	//
-	//j := &middleware.JWT{
-	//	[]byte(SigningKey),
-	//}
-	fmt.Println("============")
-	//middleware.SetSignKey("这里可以自定义key")
-	j := middleware.NewJWT()
-	claims := middleware.CustomClaims{
-		ID:             u.Id,
-		Name:           u.Name,
-		Phone:          u.Mobile,
-		StandardClaims: jwt.StandardClaims{
-			NotBefore: int64(time.Now().Unix() - 1000),
-			ExpiresAt: int64(time.Now().Unix() + 3600), // 过期时间 一小时
-			Issuer:    middleware.GetSignKey(),         //签名的发行者
-		},
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code" : helper.Code0,
+			"massage" : err,
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code" : helper.Code200,
+			"massage" : helper.CodeText(helper.Code200),
+			"token" : token,
+			"data" : u,
+		})
 	}
-	token, err := j.CreateToken(claims)
-	fmt.Println("============")
-
-	c.JSON(http.StatusOK, gin.H{
-		"code" : helper.Code200,
-		"massage" : helper.CodeText(helper.Code200),
-		"token" : token,
-		"data" : u,
-	})
 }
 
 func Add(c *gin.Context)  {
@@ -79,7 +65,6 @@ func Add(c *gin.Context)  {
 	//fmt.Println()
 	claims := c.MustGet("claims").(*middleware.CustomClaims)
 	fmt.Println(claims.ID)
-	fmt.Println(claims.Name)
 	fmt.Println("==================")
 	//name = c.Request.FormValue("name")
 	//mobile = c.Request.FormValue("mobile")
