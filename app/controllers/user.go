@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"webProject/com_party/helper"
 	"webProject/com_party/middleware"
 	"webProject/com_party/service"
 )
@@ -25,6 +26,9 @@ func GetName(c *gin.Context) {
 	//	log.Fatal("type change failure:", err)
 	//}
 	//r := service.User{ID: id}
+	//h := md5.New()
+	//h.Write([]byte("golang_bruce_lee"))
+	//fmt.Println(hex.EncodeToString(h.Sum(nil)))
 	//声明、绑定 http://127.0.0.1:8080/name/7?id=2
 	var uinfo UserInfo
 	if err := c.ShouldBind(&uinfo); err != nil {
@@ -38,12 +42,14 @@ func GetName(c *gin.Context) {
 		return
 	}
 
-	SigningKey := "123456"
-
-	j := &middleware.JWT{
-		[]byte(SigningKey),
-	}
-
+	//SigningKey := "123456"
+	//
+	//j := &middleware.JWT{
+	//	[]byte(SigningKey),
+	//}
+	fmt.Println("============")
+	//middleware.SetSignKey("这里可以自定义key")
+	j := middleware.NewJWT()
 	claims := middleware.CustomClaims{
 		ID:             u.Id,
 		Name:           u.Name,
@@ -51,15 +57,15 @@ func GetName(c *gin.Context) {
 		StandardClaims: jwt.StandardClaims{
 			NotBefore: int64(time.Now().Unix() - 1000),
 			ExpiresAt: int64(time.Now().Unix() + 3600), // 过期时间 一小时
-			Issuer:    SigningKey,                   //签名的发行者
+			Issuer:    middleware.GetSignKey(),         //签名的发行者
 		},
 	}
-
 	token, err := j.CreateToken(claims)
+	fmt.Println("============")
 
 	c.JSON(http.StatusOK, gin.H{
-		"code" : http.StatusOK,
-		"massage" : "success",
+		"code" : helper.Code200,
+		"massage" : helper.CodeText(helper.Code200),
 		"token" : token,
 		"data" : u,
 	})
@@ -79,10 +85,9 @@ func Add(c *gin.Context)  {
 	//mobile = c.Request.FormValue("mobile")
 	var uinfo UserInfo
 	if err := c.ShouldBindJSON(&uinfo); err != nil {
-		fmt.Println("我没绑定:", err)
 		c.JSON(http.StatusOK, gin.H{
-			"code" : 0,
-			"message" : "获取数据失败",
+			"code" : helper.Code10003,
+			"message" : helper.CodeText(helper.Code10003),
 			"data" : nil,
 		})
 		return
@@ -98,8 +103,8 @@ func Add(c *gin.Context)  {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code" : http.StatusOK,
-		"massage" : "success",
+		"code" : helper.Code200,
+		"massage" : helper.CodeText(helper.Code200),
 		"data" : u,
 	})
 }
