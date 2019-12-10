@@ -52,8 +52,8 @@
 
 ## 其他
 
-### 已完成 gin 、 xorm 、 mysql 
-### 未完成 redis 、MongoDB 、 JWT 、数据验证 、各种内库 、 restful
+### 已完成 gin 、 xorm 、 mysql 、JWT
+### 未完成 redis 、MongoDB 、RSA、数据验证
 
 ## 项目的秘密
 
@@ -62,11 +62,13 @@
 - webPoject
     - app
         - config
-            1. 存放该项目的载入配置参数文件
+            - app.go    //gin启动，监听等
+            - common.go //公共配置数据结构
+            - router.go //路由配置
         - controllers
             1. 存放控制器
-        - routers
-            1. 路由
+        - data
+            1. 资源文件夹
         - views
             1. 模板
         - main.go //入口
@@ -74,6 +76,9 @@
         * 存放编辑后的文件
     - com_party
         - config //存放公共配置文件，基础配置和数据库配置
+        - helper //工具
+        - libraries //库
+        - middleware //中间件
         - models //存放数据映射文件
         - service //存放业务逻辑文件
     - data
@@ -82,7 +87,7 @@
         - DB //存放数据驱动文件，目前只有mysql，后期再优化
     - templates
         1. 存放的用于反射的文件
-        2. xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/go_db?charset=utf8" templates/goxorm
+        2. 反射：xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/go_db?charset=utf8" templates/goxorm
     - go.mod //库管理文件
     - README.md
 
