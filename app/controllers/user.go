@@ -18,7 +18,7 @@ type UserInfo struct {
 }
 
 func GetName(c *gin.Context) {
-	ip := c.ClientIP()//获取ip地址
+	ip := c.ClientIP()	//获取ip地址
 	fmt.Println("=============")
 	fmt.Println(ip)
 	fmt.Println("=============")
