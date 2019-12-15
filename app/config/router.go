@@ -23,7 +23,7 @@ func reWriteParamsMiddleware() gin.HandlerFunc {
 func RegisterRouters(g *gin.Engine, appCfg Config) {
 	//全局中间件
 	{
-		//重新设置参数
+		//重新设置参数，因为原来为参数只能取一次的情况
 		g.Use(reWriteParamsMiddleware())
 		//Logger
 		if appCfg.Debug {

@@ -11,7 +11,8 @@ import (
 
 type Config struct {
 	App   app.Config
-	Model DB.Config
+	Appmodel DB.Config
+	Appredis DB.Rconfig
 }
 
 var (
@@ -42,8 +43,12 @@ func main() {
 		}
 	}
 	//初始化数据库
-	if err := DB.Setup(cfg.Model); err != nil {
+	if err := DB.Setup(cfg.Appmodel); err != nil {
 		panic(err)
+	}
+	//初始化redis
+	if err := DB.Rsetup(cfg.Appredis); err != nil {
+		//panic(err)
 	}
 	//初始化应用
 	app.Run(cfg.App)

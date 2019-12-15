@@ -13,6 +13,7 @@ const (
 	Code10007
 	Code10008
 	Code10009
+	Code10010
 )
 
 var codeText = map[int]string{
@@ -28,6 +29,7 @@ var codeText = map[int]string{
 	Code10007:           "令牌错误",
 	Code10008:           "令牌解析失败",
 	Code10009:           "令牌生成失败",
+	Code10010:           "连接redis失败",
 }
 
 func CodeText(code int) string {

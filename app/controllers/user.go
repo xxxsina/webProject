@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"webProject/com_party/helper"
+	"webProject/com_party/libraries/Cache"
 	"webProject/com_party/middleware"
 	"webProject/com_party/service"
 )
@@ -18,10 +19,23 @@ type UserInfo struct {
 }
 
 func GetName(c *gin.Context) {
+<<<<<<< HEAD
+	//redis conn
+	_, err := Cache.Set("mykey", "myval")
+	e :=Cache.Exists("mykey")
+	b, er :=Cache.Get("mykey")
+	fmt.Println("vvvvvvvvvv")
+	fmt.Println(err)
+	fmt.Println(e)
+	fmt.Println(b)
+	fmt.Println(er)
+	fmt.Println("^^^^^^^^^^^^")
+=======
 	ip := c.ClientIP()	//获取ip地址
 	fmt.Println("=============")
 	fmt.Println(ip)
 	fmt.Println("=============")
+>>>>>>> d9e37d13e20036db1f332857602407c5f31d0ddb
 	//不绑定的获取提交的参数方式 http://127.0.0.1:8080/name/7
 	//id, err := strconv.Atoi(c.Param("id"))
 	//if err != nil {

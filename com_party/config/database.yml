@@ -1,4 +1,4 @@
-model:
+appmodel:
   driver: mysql
   user: root
   password: root
