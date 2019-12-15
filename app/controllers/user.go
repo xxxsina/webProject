@@ -19,7 +19,6 @@ type UserInfo struct {
 }
 
 func GetName(c *gin.Context) {
-<<<<<<< HEAD
 	//redis conn
 	_, err := Cache.Set("mykey", "myval")
 	e :=Cache.Exists("mykey")
@@ -30,12 +29,10 @@ func GetName(c *gin.Context) {
 	fmt.Println(b)
 	fmt.Println(er)
 	fmt.Println("^^^^^^^^^^^^")
-=======
-	ip := c.ClientIP()	//获取ip地址
-	fmt.Println("=============")
-	fmt.Println(ip)
-	fmt.Println("=============")
->>>>>>> d9e37d13e20036db1f332857602407c5f31d0ddb
+	//ip := c.ClientIP()	//获取ip地址
+	//fmt.Println("=============")
+	//fmt.Println(ip)
+	//fmt.Println("=============")
 	//不绑定的获取提交的参数方式 http://127.0.0.1:8080/name/7
 	//id, err := strconv.Atoi(c.Param("id"))
 	//if err != nil {
