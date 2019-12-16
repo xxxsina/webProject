@@ -34,6 +34,7 @@ func RegisterRouters(g *gin.Engine, appCfg Config) {
 	{
 		//单个路由方法
 		g.GET("/name/:id", controllers.GetName)
+		g.GET("/name", controllers.GetRedisUserInfo)
 		//一组路由方法
 		v1 := g.Group("/v1", middleware.JWTAuth())
 		{

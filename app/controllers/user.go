@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
@@ -32,6 +33,18 @@ func (r *UserInfo) GetError(errs validator.ValidationErrors) (int, string) {
 		}
 	}
 	return 0, "参数错误"
+}
+
+func GetRedisUserInfo(c *gin.Context)  {
+	val, _ :=Cache.Get("mykey")
+	var str string
+	_ := json.Unmarshal(val, &str)
+	fmt.Println("\r\n val ===> ", str)
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    helper.Code200,
+		"massage": str,
+	})
 }
 
 func GetName(c *gin.Context) {
