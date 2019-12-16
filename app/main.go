@@ -18,6 +18,7 @@ type Config struct {
 var (
 	cfgPath = flag.String("base", "../../../src/webProject/com_party/config/base.yml", "appbase file path")
 	cfgDbPath = flag.String("database", "../../../src/webProject/com_party/config/database.yml", "db file path")
+	cfgRedisPath = flag.String("redis", "../../../src/webProject/com_party/config/redis.yml", "redis file path")
 )
 
 /**
@@ -46,9 +47,17 @@ func main() {
 	if err := DB.Setup(cfg.Appmodel); err != nil {
 		panic(err)
 	}
+	//redis配置文件读取
+	if redisConfig, err := ioutil.ReadFile(*cfgRedisPath); err != nil {
+		panic(err)
+	} else {
+		if err := yaml.Unmarshal(redisConfig, &cfg); err != nil {
+			panic(err)
+		}
+	}
 	//初始化redis
 	if err := DB.Rsetup(cfg.Appredis); err != nil {
-		//panic(err)
+		panic(err)
 	}
 	//初始化应用
 	app.Run(cfg.App)

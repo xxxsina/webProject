@@ -13,7 +13,7 @@ import (
 
 //这里提供一个参数提交的绑定数据结构
 type UserInfo struct {
-	Id     int    `form:"id" json:"id" binding:"required"`
+	Id     int    `form:"id" json:"id"`
 	Name   string `form:"name" json:"name" binding:"required"`
 	Mobile string `form:"mobile" json:"mobile" binding:"required"`
 }
@@ -61,9 +61,8 @@ func GetName(c *gin.Context) {
 	//声明、绑定 http://127.0.0.1:8080/name/7?id=2
 	var uinfo UserInfo
 	if err := c.ShouldBind(&uinfo); err != nil {
-		fmt.Println(err.(validator.ValidationErrors))
 		//code, msg := uinfo.GetError(err.(validator.ValidationErrors))
-		//fmt.Println(code)
+		fmt.Println(err)
 		//fmt.Println(msg)
 		//log.Fatal("bind user info failure :", code, msg)
 		return

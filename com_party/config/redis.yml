@@ -1,9 +1,9 @@
 appredis:
   network: "tcp"
-  addr: 127.0.0.1:6379
-  password: ""
-  db: 0
-  maxIdle: 3
-  maxActive: 8
-  idleTimeout: 200
-  timeOut: 3600
+  addr: 192.168.3.110:6379
+  password: "1qaz2wsx"
+  db: 1
+  maxidle: 3
+  maxactive: 8
+  idletimeout: 200
+  timeout: 3600
