@@ -52,8 +52,8 @@
 
 ## 其他
 
-### 已完成 gin 、 xorm 、 mysql 、JWT
-### 未完成 redis 、MongoDB 、RSA、数据验证
+### 已完成 gin 、 xorm 、 mysql 、JWT 、redis（完成了基本的set get exist操作）
+### 未完成 MongoDB
 
 ## 项目的秘密
 
@@ -92,6 +92,20 @@
     - README.md
 
 ## LICENSE
+
+### 热跟新(热启动)
+
+ ```
+    # go get github.com/pilu/fresh
+    # 进入项目目录，含有main.go文件夹
+    # ../../../bin/fresh.exe  //这里需要根据具体fresh存放的位置来
+ ```
+
+### 数据加密
+
+```
+    # go get github.com/wumansgy/goEncrypt
+```
 
 BSD License
 [https://www.cnblogs.com/Paul-watermelon/articles/10842752.html](https://www.cnblogs.com/Paul-watermelon/articles/10842752.html)

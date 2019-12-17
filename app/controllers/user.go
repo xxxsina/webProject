@@ -38,7 +38,7 @@ func (r *UserInfo) GetError(errs validator.ValidationErrors) (int, string) {
 func GetRedisUserInfo(c *gin.Context)  {
 	val, _ :=Cache.Get("mykey")
 	var str string
-	_ := json.Unmarshal(val, &str)
+	_ = json.Unmarshal(val, &str)
 	fmt.Println("\r\n val ===> ", str)
 
 	c.JSON(http.StatusOK, gin.H{
