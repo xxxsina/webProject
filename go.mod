@@ -13,6 +13,7 @@ require (
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/pkg/errors v0.8.1
 	github.com/sirupsen/logrus v1.2.0
+	github.com/wumansgy/goEncrypt v0.0.0-20190822060801-cf9a6f8787e4
 	gopkg.in/yaml.v2 v2.2.2
 	xorm.io/builder v0.3.6
 	xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb

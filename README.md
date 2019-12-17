@@ -42,6 +42,13 @@
 
 *	第二步是将编译后生成的可执行文件放到 bin 目录下（$GOPATH/bin），编译后的包文件放到 pkg 目录下（$GOPATH/pkg）。（$GOPATH为Go的工作目录）
 
+```
+    # 试用了几种办法，还是这种靠谱，一句搞定win环境编译成linux  
+    # GOOS=linux GOARCH=amd64 go build
+    
+    # 这个也可以，但是生成的bin文件在$GOPATH/bin里面
+    # GOOS=linux GOARCH=amd64 go install
+```
 
 #### 三者区别：
 
@@ -105,6 +112,7 @@
 
 ```
     # go get github.com/wumansgy/goEncrypt
+    # 如果采用AES的CBC模式，密钥key的长度为16、24、32位
 ```
 
 BSD License

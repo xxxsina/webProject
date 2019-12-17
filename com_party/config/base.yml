@@ -5,3 +5,8 @@ app:
   logfilepath: "./logs/"
   logfilename: "log"
   jwtsignkey: "d3ab7ede15cfdcfff930553da3889d01"
+  encryptsignios: "40a952071f47cbc54c999d034e6cbde1"
+  encryptsignandroid: "1338fc9a13f712db289240829b562a48"
+  encryptsignwap: "1d7328d29828c046de981c2ad1a96dce"
+  encryptsignmini: "e828f8db433920ed32f37ac3f9c9200a"
+  encryptsignpc: "04507e63ee4b6b30993c492f836935f3"

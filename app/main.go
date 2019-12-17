@@ -15,10 +15,16 @@ type Config struct {
 	Appredis DB.Rconfig
 }
 
+//var (
+//	cfgPath = flag.String("base", "./config/base.yml", "appbase file path")
+//	cfgDbPath = flag.String("database", "./config/database.yml", "db file path")
+//	cfgRedisPath = flag.String("redis", "./config/redis.yml", "redis file path")
+//)
+
 var (
-	cfgPath = flag.String("base", "../../../src/webProject/com_party/config/base.yml", "appbase file path")
-	cfgDbPath = flag.String("database", "../../../src/webProject/com_party/config/database.yml", "db file path")
-	cfgRedisPath = flag.String("redis", "../../../src/webProject/com_party/config/redis.yml", "redis file path")
+	cfgPath = flag.String("base", "E:/workspace/gopath/src/webProject/com_party/config/base.yml", "appbase file path")
+	cfgDbPath = flag.String("database", "E:/workspace/gopath/src/webProject/com_party/config/database.yml", "db file path")
+	cfgRedisPath = flag.String("redis", "E:/workspace/gopath/src/webProject/com_party/config/redis.yml", "redis file path")
 )
 
 /**
