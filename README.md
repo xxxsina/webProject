@@ -101,7 +101,7 @@
         # git clone https://github.com/golang/crypto.git
         > 2
         # cd ($GOPATH)/src/cloud.google.com/
-        # git clone  https://github.com/googleapis/google-cloud-go.git
+        # git clone  https://github.com/googleapis/google-cloud-go.git  //这里不容易下下来，就去网站直接下win版的
         > 3
         # go get github.com/go-xorm/cmd/xorm
         # go install github.com/go-xorm/cmd/xorm    //这时候在bin里面生成了一个xorm.exe文件
