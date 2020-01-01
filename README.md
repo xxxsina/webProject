@@ -140,20 +140,20 @@
 
 ### NSQ 安装
 1、下载地址
-    ```
-        https://nsq.io/deployment/installing.html
-    ```
+```
+    https://nsq.io/deployment/installing.html
+```
 2、解压 
-    ```
-        tar -zxvf nsq-1.2.0.linux-amd64.go1.12.9.tar.gz
-    ```
+```
+    tar -zxvf nsq-1.2.0.linux-amd64.go1.12.9.tar.gz
+```
 3、添加环境变量 
-    ```
-        sudo vim /etc/profile.d/nsq.sh
-            # 加入以下
-            # export PATH=$PATH:/home/[your-path]/bin
-        # 刷新配置
-        source /etc/profile
-    ```
+```
+    sudo vim /etc/profile.d/nsq.sh
+        # 加入以下
+        # export PATH=$PATH:/home/[your-path]/bin
+    # 刷新配置 
+    source /etc/profile
+```
 BSD License
 [https://www.cnblogs.com/Paul-watermelon/articles/10842752.html](https://www.cnblogs.com/Paul-watermelon/articles/10842752.html)
