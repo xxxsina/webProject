@@ -56,6 +56,7 @@
 
 * 而go install 后面是直接加xxx（xxx为目录名） ； 从文件夹编译
 
+* https://www.cnblogs.com/Paul-watermelon/articles/10842752.html
 
 ## 其他
 
@@ -155,5 +156,14 @@
     # 刷新配置 
     source /etc/profile
 ```
-BSD License
-[https://www.cnblogs.com/Paul-watermelon/articles/10842752.html](https://www.cnblogs.com/Paul-watermelon/articles/10842752.html)
+4、NSQadmin地址
+```
+    http://nsqadmin.xxx.com/
+```
+5、配置简单集群start和end
+```
+    # 启动
+    ../../nsq/sh/nsqstart.sh
+    # 停止
+    ../../nsq/sh/nsqend.sh
+```
