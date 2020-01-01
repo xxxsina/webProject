@@ -142,7 +142,8 @@
 ### NSQ 安装
 1、下载地址
 ```
-    https://nsq.io/deployment/installing.html
+    # https://nsq.io/deployment/installing.html
+    sudo wget nsq-1.2.0.linux-amd64.go1.12.9.tar.gz
 ```
 2、解压 
 ```
