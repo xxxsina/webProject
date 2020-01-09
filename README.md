@@ -168,3 +168,46 @@
     # 停止
     ../../nsq/sh/nsqend.sh
 ```
+
+### MongoDB 安装
+
+1、直接去官网看
+```
+    https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+```
+2、查看版本的方法
+```
+    # mongo
+    # 或
+    # mongod --version
+    # 或
+    # mongo --version
+    # 或
+    # mongod
+```
+3、配置文件mongod.conf所在路径
+```
+    # cd /etc/mongod.conf
+    
+    # dbPath: /var/lib/mongodb   #数据库存储路径
+    # logAppend: true     #以追加的方式写入日志
+    # path: /var/log/mongodb/mongod.log   #日志文件路径
+    # port: 27017 #端口
+    # bindIp: 127.0.0.1   #绑定监听的ip 127.0.0.1只能监听本地的连接，可以改为0.0.0.0
+```
+4、启动、关闭
+```
+    # sudo service mongod start  #启动
+    # sudo service mongod stop   #关闭
+    # ps aux | grep mongod   #查看守护进程mongod的运行状态
+    
+```
+5、卸载
+```
+    # sudo service mongod stop
+    # sudo apt-get purge mongodb-org*
+
+    # 数据库和日志文件的路径取决于/etc/mongod.conf文件中的配置
+    # sudo rm -r /var/log/mongodb   #移除日志文件
+    # sudo rm -r /var/lib/mongodb   #移除数据库
+```
