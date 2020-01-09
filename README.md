@@ -194,6 +194,44 @@
     # path: /var/log/mongodb/mongod.log   #日志文件路径
     # port: 27017 #端口
     # bindIp: 127.0.0.1   #绑定监听的ip 127.0.0.1只能监听本地的连接，可以改为0.0.0.0
+
+    # auth=true #设置需要登录权限
+    ## 进入mongo，输入如下命令设置管理员账号密码
+    # mongo --port 27017
+    # 进入数据库，并创建用户和设置密码及给定权限(userAdminAnyDatabase[创建和管理数据库用户的权限]、readWrite[读取和写入数据库])
+    > use admin;
+    > db.createUser(
+            {
+                user: "myUserAdmin",
+                pwd: "cCazQkeVRyhHYf",
+                roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+            }
+        )
+    # 修改密码的命令如下
+    > db.changeUserPassword('myUserAdmin','tUDfqjDWHR4hSIXs')
+
+    ## 连接数据库，并创建用户
+    # mongo --port 27017 -u "myUserAdmin" -p "cCazQkeVRyhHYf" --authenticationDatabase "admin"
+    > use bili
+    > db.createUser(
+            {
+                user: "bilibili",
+                pwd: "bilibiliforever",
+                roles: [ { role: "readWrite", db: "bili" } ]
+            }
+        )
+
+    ## 以test用户连接即可操作数据库bili
+    # mongo --port 27017 -u "bilibili" -p "bilibiliforever" --authenticationDatabase "bili"
+    > use bili
+    > db.bili.insert({"name":"bili"})
+    WriteResult({ "nInserted" : 1 })    
+```
+```
+    # 更多相关操作
+    # https://blog.csdn.net/zhangpeterx/article/details/88857699
+    # https://www.cnblogs.com/cmyxn/p/6610297.html
+    # https://blog.csdn.net/u010649766/article/details/79817549
 ```
 4、启动、关闭
 ```
