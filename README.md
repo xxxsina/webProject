@@ -56,11 +56,12 @@
 
 * 而go install 后面是直接加xxx（xxx为目录名） ； 从文件夹编译
 
+* https://www.cnblogs.com/Paul-watermelon/articles/10842752.html
 
 ## 其他
 
 ### 已完成 gin 、 xorm 、 mysql 、JWT 、redis（完成了基本的set get exist操作）
-### 未完成 MongoDB
+### 未完成 MongoDB、NSQ
 
 ## 项目的秘密
 
@@ -138,5 +139,32 @@
     # go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
-BSD License
-[https://www.cnblogs.com/Paul-watermelon/articles/10842752.html](https://www.cnblogs.com/Paul-watermelon/articles/10842752.html)
+### NSQ 安装
+1、下载地址
+```
+    # https://nsq.io/deployment/installing.html
+    sudo wget nsq-1.2.0.linux-amd64.go1.12.9.tar.gz
+```
+2、解压 
+```
+    tar -zxvf nsq-1.2.0.linux-amd64.go1.12.9.tar.gz
+```
+3、添加环境变量 
+```
+    sudo vim /etc/profile.d/nsq.sh
+        # 加入以下
+        # export PATH=$PATH:/home/[your-path]/bin
+    # 刷新配置 
+    source /etc/profile
+```
+4、NSQadmin地址
+```
+    http://nsqadmin.xxx.com/
+```
+5、配置简单集群start和end
+```
+    # 启动
+    ../../nsq/sh/nsqstart.sh
+    # 停止
+    ../../nsq/sh/nsqend.sh
+```
