@@ -187,7 +187,7 @@
 ```
 3、配置文件mongod.conf所在路径
 ```
-    # cd /etc/mongod.conf
+    # cd /etc/mongod.conf   #配置文件
     
     # dbPath: /var/lib/mongodb   #数据库存储路径
     # logAppend: true     #以追加的方式写入日志
@@ -202,36 +202,55 @@
     > use admin;
     > db.createUser(
             {
-                user: "myUserAdmin",
-                pwd: "cCazQkeVRyhHYf",
+                user: "root",
+                pwd: "1qa2wsqazwsx",
                 roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
             }
         )
     # 修改密码的命令如下
     > db.changeUserPassword('myUserAdmin','tUDfqjDWHR4hSIXs')
-
+    # 验证密码是否添加成功
+    > db.auth("root", "1qa2wsqazwsx") #如果返回1，则表示成功。
+    # 要使密码生效，配置文件里面：找到#security: 取消注释
+    > security:
+        > authorization: enabled #注意缩进，缩进参照配置文件其他配置。缩进错误可能重启不成功。
     ## 连接数据库，并创建用户
-    # mongo --port 27017 -u "myUserAdmin" -p "cCazQkeVRyhHYf" --authenticationDatabase "admin"
+    # mongo --port 27017 -u "myUserAdmin" -p "tUDfqjDWHR4hSIXs" --authenticationDatabase "admin"
     > use bili
     > db.createUser(
             {
-                user: "bilibili",
-                pwd: "bilibiliforever",
-                roles: [ { role: "readWrite", db: "bili" } ]
+                user: "moji_01",
+                pwd: "1qaz2wsx",
+                roles: [ { role: "readWrite", db: "moji" } ]
             }
         )
+    > db.auth("moji_01", "1qaz2wsx")
 
     ## 以test用户连接即可操作数据库bili
-    # mongo --port 27017 -u "bilibili" -p "bilibiliforever" --authenticationDatabase "bili"
-    > use bili
-    > db.bili.insert({"name":"bili"})
-    WriteResult({ "nInserted" : 1 })    
+    # mongo --port 21071 -u "moji_01" -p "1qaz2wsx" --authenticationDatabase "moji"
+    > use moji
+    # 这里需要默认添加一条数据进去，要不然就是坑啊
+    > db.config.insert({"databaseName":"moji", "object":"moji"})
+    WriteResult({ "nInserted" : 1 })
+
+    ps: 添加用户时各个角色对应权限
+    1.数据库用户角色：read、readWrite;
+    2.数据库管理角色：dbAdmin、dbOwner、userAdmin；
+    3.集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManager；
+    4.备份恢复角色：backup、restore
+    5.所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
+    6.超级用户角色：root
+    # https://segmentfault.com/a/1190000015603831
 ```
 ```
     # 更多相关操作
     # https://blog.csdn.net/zhangpeterx/article/details/88857699
     # https://www.cnblogs.com/cmyxn/p/6610297.html
     # https://blog.csdn.net/u010649766/article/details/79817549
+    # https://blog.csdn.net/qq_38363459/article/details/80159387 #带密码的链接操作
+    # https://cardinfolink.github.io/2017/05/17/mgo-session/ #连接池
+    # http://www.jyguagua.com/?p=3126
+    # https://blog.csdn.net/LK_whq/article/details/92414353 #增删改查
 ```
 4、启动、关闭
 ```
