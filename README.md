@@ -107,7 +107,7 @@
         # go get github.com/go-xorm/cmd/xorm
         # go install github.com/go-xorm/cmd/xorm    //这时候在bin里面生成了一个xorm.exe文件
         >> 4 开始执行reverse了，在bin目录下
-        # ./xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/go_db?charset=utf8" ./templates/goxorm
+        # ./xorm.exe reverse mysql "root:root@tcp(127.0.0.1:3306)/[databaseName]?charset=utf8" ../src/templates/goxorm ../src/models
         >>> 5 生成的models也在bin目录下
         ```
     - go.mod //库管理文件
